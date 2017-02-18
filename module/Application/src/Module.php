@@ -26,14 +26,14 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\Personnel::class => function($container) {
-                    $tableGateway = $container->get(Model\PersonnelGateway::class);
-                    return new Model\Personnel($tableGateway);
+                Repository\PersonRepository::class => function($container) {
+                    $tableGateway = $container->get(Repository\PersonnelGateway::class);
+                    return new Repository\PersonRepository($tableGateway);
                 },
-                Model\PersonnelGateway::class => function ($container) {
+                Repository\PersonnelGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Person());
+                    $resultSetPrototype->setArrayObjectPrototype(new Entity\Person());
                     return new TableGateway('personnel', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
@@ -46,7 +46,7 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\PersonnelController::class => function($container) {
                     return new Controller\PersonnelController(
-                        $container->get(Model\Personnel::class)
+                        $container->get(Repository\PersonRepository::class)
                     );
                 },
             ],

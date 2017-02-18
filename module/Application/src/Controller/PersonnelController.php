@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use Application\Model\Personnel;
+use Application\Repository\PersonRepository;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -10,7 +10,7 @@ class PersonnelController extends AbstractActionController
 {
     private $table;
     
-    public function __construct(Personnel $table) {
+    public function __construct(PersonRepository $table) {
         $this->table = $table;
     }
     

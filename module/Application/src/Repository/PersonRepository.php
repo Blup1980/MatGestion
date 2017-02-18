@@ -1,11 +1,11 @@
 <?php
 
-namespace Application\Model;
+namespace Application\Repository;
 
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class Personnel {
+class PersonRepository {
     private $tableGateway;
     
     public function __construct(TableGatewayInterface $tableGateway) {
