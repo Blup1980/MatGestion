@@ -2,6 +2,8 @@
 
 Namespace Application\Service;
 
+use Application\Repository;
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,8 +12,13 @@ Namespace Application\Service;
 
 class PersonnelManager{
     private $personRepository;
+    private $grades = [
+        'Rec',
+        'Sap',
+        'Cpl'
+    ];
     
-    public function __construct(Application\Repository\PersonRepository $personRepository) {
+    public function __construct(\Application\Repository\PersonRepository $personRepository) {
         $this->personRepository = $personRepository;
     }
     
@@ -21,6 +28,10 @@ class PersonnelManager{
     
     public function edit(Application\Entity\Person $person) {
         
+    }
+    
+    public function getGrades(){
+        return $this->grades;
     }
         
 }

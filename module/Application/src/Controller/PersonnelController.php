@@ -2,23 +2,17 @@
 
 namespace Application\Controller;
 
-use Application\Repository\PersonRepository;
+use Application\Service;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\PersonForm;
 
 class PersonnelController extends AbstractActionController
 {
-    private $table;
-    private $grades = [
-        'Rec',
-        'Sap',
-        'Cpl'
-    ];
-
+    private $manager;
     
-    public function __construct(PersonRepository $table) {
-        $this->table = $table;
+    public function __construct(\Application\Service\PersonnelManager $manager) {
+        $this->manager = $manager;
     }
     
     public function indexAction()
@@ -28,7 +22,7 @@ class PersonnelController extends AbstractActionController
     
     public function addAction() {
         // Create Contact Us form
-        $form = new PersonForm($this->grades);
+        $form = new PersonForm($this->manager->getGrades());
 
         // Check if user has submitted the form
         if($this->getRequest()->isPost()) 

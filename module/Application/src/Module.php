@@ -40,6 +40,7 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Entity\Person());
                     return new TableGateway('personnel', $dbAdapter, null, $resultSetPrototype);
                 },
+                        
             ],
         ];
     }
@@ -49,9 +50,8 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Controller\PersonnelController::class => function($container) {
-                    return new Controller\PersonnelController(
-                        $container->get(Repository\PersonRepository::class)
-                    );
+                    $PersonnelManager = $container->get(Service\PersonnelManager::class);
+                    return new Controller\PersonnelController($PersonnelManager);   
                 },
             ],
         ];

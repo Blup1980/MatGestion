@@ -5,7 +5,6 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
 
-
 class PersonForm extends Form {
     
     private $grades;
@@ -116,7 +115,7 @@ class PersonForm extends Form {
                 'name' => 'StringLength',
                    'options' => [
                      'min' => 1,
-                     'max' => 25                           
+                     'max' => 25
                     ],
                 ],
             ],
