@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Belmont Matériel')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -33,12 +33,18 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?= $this->url('home') ?>">
-                        <img src="<?= $this->basePath('img/zf-logo-mark.svg') ?>" height="28" alt="Zend Framework <?= \Application\Module::VERSION ?>"/>&nbsp;Skeleton Application
+                        <img src="<?= $this->basePath('img/Logo.svg') ?>" height="30" alt="SDIS Ouest Lavaux <?= \Application\Module::VERSION ?>"/>&nbsp;Matériel Belmont
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?= $this->url('home') ?>">Home</a></li>
+                        <li class="active"><a href="<?= $this->url('home') ?>">Accueil</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?= $this->url('personnel') ?>">Personnel</a></li>
+                    </ul>    
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?= $this->url('personnel') ?>">Matériel</a></li>
                     </ul>
                 </div>
             </div>
@@ -47,7 +53,7 @@
             <?= $this->content ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?= date('Y') ?> by Zend Technologies Ltd. All rights reserved.</p>
+                <p>&copy; 2016 - <?= date('Y') ?> par Xavier Raemy. Tout droits réservés</p>
             </footer>
         </div>
         <?= $this->inlineScript() ?>
