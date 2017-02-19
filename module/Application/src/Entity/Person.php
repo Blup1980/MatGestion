@@ -10,14 +10,32 @@ namespace Application\Entity;
 
 class Person
 {
-    public $id;
-    public $lastname;
-    public $firstname;
+    private $id;
+    private $lastname;
+    private $firstname;
+    private $grade;
     
     public function exchangeArray(array $data){
         $this->id       = !empty($data['id']) ? $data['id'] : NULL;
         $this->lastname = !empty($data['lastname']) ? $data['lastname'] : NULL;
         $this->firstname= !empty($data['firstname']) ? $data['firstname'] : NULL;
+        $this->grade    = !empty($data['grade']) ? $data['grade'] : NULL;
+    }
+    
+    public function getId(){
+        return $this->id;
+    }
+    
+    public function getLastname(){
+        return $this->lastname;
+    }
+    
+    public function getFirstname(){
+        return $this->firstname;
+    }
+    
+    public function getGrade(){
+        return $this->grade;
     }
 }
 

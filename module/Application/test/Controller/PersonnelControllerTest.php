@@ -32,7 +32,7 @@ class PersonnelControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('application');
         $this->assertControllerName(PersonnelController::class); // as specified in router's controller name alias
         $this->assertControllerClass('PersonnelController');
-        $this->assertMatchedRouteName('home');
+        $this->assertMatchedRouteName('personnel');
     }
 
 
