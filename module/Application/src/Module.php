@@ -27,20 +27,9 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Service\PersonnelManager::class => function($container) {
-                    $PersonRepository = $container->get(Repository\PersonRepository::class);
-                    return new Service\PersonnelManager($PersonRepository);
+                    $db = $container->get('db');
+                    return new Service\PersonnelManager($db);
                 },
-                Repository\PersonRepository::class => function($container) {
-                    $tableGateway = $container->get(Repository\PersonnelGateway::class);
-                    return new Repository\PersonRepository($tableGateway);
-                },
-                Repository\PersonnelGateway::class => function ($container) {
-                    $dbAdapter = $container->get(AdapterInterface::class);
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Entity\Person());
-                    return new TableGateway('personnel', $dbAdapter, null, $resultSetPrototype);
-                },
-                        
             ],
         ];
     }

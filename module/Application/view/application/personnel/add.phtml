@@ -25,17 +25,17 @@ $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
             <?= $this->formElement($form->get('firstname')); ?>
             <?= $this->formElementErrors($form->get('firstname')); ?>
         </div>
-        <div class="form-group">    
+        <div class="form-group">
             <?= $this->formLabel($form->get('lastname')); ?>
             <?= $this->formElement($form->get('lastname')); ?>
             <?= $this->formElementErrors($form->get('lastname')); ?>
-        </div>    
-        <div class="form-group"> 
+        </div>
+        <div class="form-group">
             <?= $this->formLabel($form->get('grade')); ?>
             <?= $this->formElement($form->get('grade')); ?>
             <?= $this->formElementErrors($form->get('grade')); ?>
         </div>
         <?= $this->formElement($form->get('submit')); ?>
         <?= $this->form()->closeTag(); ?>
-    </div>    
+    </div>
 </div>

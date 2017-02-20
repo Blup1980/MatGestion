@@ -15,6 +15,13 @@ class Person
     private $firstname;
     private $grade;
     
+    public function populate( $id, $firstName, $lastname, $grade) {
+        $this->id       = !empty($id) ? $id : NULL;
+        $this->lastname = !empty($lastname) ? $lastname : NULL;
+        $this->firstname= !empty($firstName) ? $firstName : NULL;
+        $this->grade    = !empty($grade) ? $grade : NULL;
+    }
+    
     public function exchangeArray(array $data){
         $this->id       = !empty($data['id']) ? $data['id'] : NULL;
         $this->lastname = !empty($data['lastname']) ? $data['lastname'] : NULL;

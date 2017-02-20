@@ -10,6 +10,7 @@ namespace Application;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Db\Adapter\AdapterAbstractServiceFactory;
 
 return [
     'router' => [
@@ -57,5 +58,13 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+    ],
+    'service_manager' => [
+        'aliases' => [
+            'db' => \Zend\Db\Adapter\Adapter::class,
+        ],
+        'factories' => [
+            \Zend\Db\Adapter\Adapter::class => AdapterAbstractServiceFactory::class,
+            ],
     ],
 ];
