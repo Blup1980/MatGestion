@@ -20,11 +20,19 @@ class PersonnelManager{
         $this->db = $db;     
     }
     
-    public function addNew(Application\Entity\Person $person) {
-        
+    public function addNew(\Application\Entity\Person $person) {
+        $statement = $this->db->createStatement('INSERT INTO `personnel` (`lastname`,`firstname`,`grade_id`)
+        VALUES ( ? , ? , ? );', 
+                [
+                    $person->getLastname(),
+                    $person->getFirstname(),
+                    $person->getGrade()
+                ] );
+
+        $statement->execute();
     }
     
-    public function edit(Application\Entity\Person $person) {
+    public function edit(\Application\Entity\Person $person) {
         
     }
     

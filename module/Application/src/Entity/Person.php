@@ -33,16 +33,32 @@ class Person
         return $this->id;
     }
     
+    public function setId($id){
+        $this->id = $id;
+    }
+    
     public function getLastname(){
         return $this->lastname;
+    }
+    
+    public function setLastname($lastname){
+        $this->lastname = $lastname;
     }
     
     public function getFirstname(){
         return $this->firstname;
     }
     
+    public function setFirstName($firstname) {
+        $this->firstname = $firstname;
+    }
+    
     public function getGrade(){
         return $this->grade;
+    }
+    
+    public function setGrade($grade) {
+        $this->grade = $grade;
     }
 }
 
