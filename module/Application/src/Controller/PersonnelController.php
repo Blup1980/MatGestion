@@ -2,8 +2,7 @@
 
 namespace Application\Controller;
 
-//use Application\Service;
-use Application\Entity\Person;
+use Application\Entity\PersonEntity;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\PersonForm;
@@ -18,15 +17,8 @@ class PersonnelController extends AbstractActionController
     
     public function indexAction()
     {
-        $dummyPerson1 = new Person();
-        $dummyPerson2 = new Person();
-        $dummyPerson1->populate(1, 'hans', 'Shaudi', 'Cpl');
-        $dummyPerson2->populate(2, 'Liselotte', 'Shaudi', 'Sap');
-        $dummyPersons = [
-            $dummyPerson1,
-            $dummyPerson2
-        ];
-        return new ViewModel(['persons' => $dummyPersons]);
+        $personnels = $this->manager->getAll();
+        return new ViewModel(['persons' => $personnels]);
     }
     
     public function addAction() {
@@ -37,10 +29,9 @@ class PersonnelController extends AbstractActionController
             $form->setData($data);
             if($form->isValid()) {
                 $data = $form->getData();
-                $newPerson = new Person();
+                $newPerson = new PersonEntity();
                 $newPerson->exchangeArray($data);
                 $this->manager->addNew($newPerson);
-
                 return $this->redirect()->toRoute('personnel');
             }            
         } 

@@ -2,5 +2,11 @@
   <td> <?= $this->person->getLastname() ?> </td>
   <td> <?= $this->person->getFirstName() ?> </td>
   <td> <?= $this->person->getGrade() ?> </td>
+  <td> <?php if($this->person->getActive()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
+  <td> <?php if($this->person->getDriver()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
+  <td> <?php if($this->person->getAPR()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
+  <td> <?php if($this->person->getPrepose()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
+  <td> <?php if($this->person->getCIPA()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
+  <td> <?php if($this->person->getCISDIS()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
   <td> <a href=personnel/edit?id=<?= $this->person->getId() ?> class="btn btn-default btn-xs">Editer</a></td>
 </tr>

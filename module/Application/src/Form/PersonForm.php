@@ -11,25 +11,16 @@ class PersonForm extends Form {
     
     public function __construct($grades)
     {
-        // Define form name
         parent::__construct('Personnel');
-
         $this->grades = $grades;
-        
-        // Set POST method for this form
         $this->setAttribute('method', 'post');
-
-        // Add form elements
         $this->addElements();
-        
-        // Add filtering/validation rules
         $this->addInputFilter();
     }
     
     
     private function addElements() 
     {
-        // Add "prenom" field
         $this->add([
                 'type'  => 'text',
                 'name' => 'firstname',
@@ -41,7 +32,6 @@ class PersonForm extends Form {
                 ],
             ]);
 
-        // Add "nom" field
         $this->add([
                 'type'  => 'text',
                 'name' => 'lastname',
@@ -53,7 +43,6 @@ class PersonForm extends Form {
                 ],
             ]);
 
-        // Add "grade" field
         $this->add([
                 'type'  => 'Zend\Form\Element\Select',
                 'name' => 'grade',
@@ -64,6 +53,72 @@ class PersonForm extends Form {
                     'label' => 'Which is your mother tongue?',
                      'empty_option' => 'Choisir le grade',
                      'value_options' => $this->grades
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'active',
+                'attributes' => [
+                    'id' => 'active'  
+                ],
+                'options' => [
+                    'label' => 'Actif',
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'driver',
+                'attributes' => [
+                    'id' => 'driver'  
+                ],
+                'options' => [
+                    'label' => 'Chauffeur',
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'APR',
+                'attributes' => [
+                    'id' => 'APR'  
+                ],
+                'options' => [
+                    'label' => 'APR',
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'prepose',
+                'attributes' => [
+                    'id' => 'prepose'  
+                ],
+                'options' => [
+                    'label' => 'Préposé',
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'CIPA',
+                'attributes' => [
+                    'id' => 'CIPA'  
+                ],
+                'options' => [
+                    'label' => 'CIPA',
+                ],
+            ]);
+        
+        $this->add([
+                'type'  => 'checkbox',
+                'name' => 'CISDIS',
+                'attributes' => [
+                    'id' => 'CISDIS'  
+                ],
+                'options' => [
+                    'label' => 'CISDIS',
                 ],
             ]);
 
@@ -147,6 +202,119 @@ class PersonForm extends Form {
             ]
         ]     
         );
-        
-    }  
+        $inputFilter->add([
+            'name'     => 'active',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+        $inputFilter->add([
+            'name'     => 'driver',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+        $inputFilter->add([
+            'name'     => 'APR',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+        $inputFilter->add([
+            'name'     => 'prepose',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+        $inputFilter->add([
+            'name'     => 'CIPA',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+        $inputFilter->add([
+            'name'     => 'CISDIS',
+            'required' => false,
+            'filters'  => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],                  
+            ],                
+            'validators' => [
+                [
+                'name' => 'InArray',
+                   'options' => [
+                       'haystack' => [ 0, 1],
+                       'inclusive' => true
+                   ]
+                ]
+            ]
+        ]     
+        );
+    }
 }

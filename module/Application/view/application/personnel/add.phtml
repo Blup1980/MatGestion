@@ -13,6 +13,31 @@ $form->get('grade')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>''
     ]);
+$form->get('active')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+$form->get('driver')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+$form->get('APR')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+$form->get('prepose')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+$form->get('CIPA')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+$form->get('CISDIS')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>''
+    ]);
+
 $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
 ?>
 
@@ -35,7 +60,57 @@ $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
             <?= $this->formElement($form->get('grade')); ?>
             <?= $this->formElementErrors($form->get('grade')); ?>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('active')); ?>
+            <?= $this->formElement($form->get('active')); ?>
+            <?= $this->formElementErrors($form->get('active')); ?>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('driver')); ?>
+            <?= $this->formElement($form->get('driver')); ?>
+            <?= $this->formElementErrors($form->get('driver')); ?>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('APR')); ?>
+            <?= $this->formElement($form->get('APR')); ?>
+            <?= $this->formElementErrors($form->get('APR')); ?>
+        </div> 
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('prepose')); ?>
+            <?= $this->formElement($form->get('prepose')); ?>
+            <?= $this->formElementErrors($form->get('prepose')); ?>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('CIPA')); ?>
+            <?= $this->formElement($form->get('CIPA')); ?>
+            <?= $this->formElementErrors($form->get('CIPA')); ?>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <?= $this->formLabel($form->get('CISDIS')); ?>
+            <?= $this->formElement($form->get('CISDIS')); ?>
+            <?= $this->formElementErrors($form->get('CISDIS')); ?>
+        </div>
+    </div>
+    
+    
+</div>  
+<div class="row">
+    <div class="col-md-6">
         <?= $this->formElement($form->get('submit')); ?>
         <?= $this->form()->closeTag(); ?>
     </div>
-</div>
+ </div>    

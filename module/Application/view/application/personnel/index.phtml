@@ -7,11 +7,17 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Grade</th>
+                <th>Actif</th>
+                <th>Chauffeur</th>
+                <th>APR</th>
+                <th>Préposé</th>
+                <th>CIPA</th>
+                <th>CISDIS</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
             foreach ($this->persons as $person) {
               echo $this->partial('application/personnel/indexTableRow', ['person'=>$person]);
             }    
@@ -19,5 +25,4 @@
         </tbody>
     </table>
     <a href=personnel/add class="btn btn-default">Ajouter</a>
-
 </div>
