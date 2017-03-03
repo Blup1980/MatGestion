@@ -126,8 +126,7 @@ class PersonForm extends Form {
         $this->add([
                 'type'  => 'submit',
                 'name' => 'submit',
-                'attributes' => [                
-                    'value' => 'Ok',
+                'attributes' => [
                 ],
             ]);
     }  

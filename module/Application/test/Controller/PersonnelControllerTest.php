@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ApplicationTest\Controller;
 
 use Application\Controller\PersonnelController;
@@ -34,6 +33,15 @@ class PersonnelControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('PersonnelController');
         $this->assertMatchedRouteName('personnel');
     }
-
+    
+    public function testAddActionCanBeAccessed()
+    {
+        $this->dispatch('/personnel/add', 'GET');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('application');
+        $this->assertControllerName(PersonnelController::class); // as specified in router's controller name alias
+        $this->assertControllerClass('PersonnelController');
+        $this->assertMatchedRouteName('add');
+    } 
 
 }

@@ -15,14 +15,49 @@ class PersonnelController extends AbstractActionController
         $this->manager = $manager;
     }
     
-    public function indexAction()
-    {
+    public function indexAction() {
         $personnels = $this->manager->getAll();
         return new ViewModel(['persons' => $personnels]);
     }
     
+    public function editAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        try {
+            $person = $this->manager->getPerson($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('personnel', ['action' => 'index']);
+        }
+        $form = new PersonForm($this->manager->getGrades());
+        $form->bind($person);
+        $form->get('submit')->setAttribute('value', 'Ok');
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', 'edit');
+        if($this->getRequest()->isPost()) 
+        {
+            $data = $this->params()->fromPost();            
+            $form->setData($data);
+            if($form->isValid()) {
+                $data = $form->getData();
+                $newPerson = new PersonEntity();
+                $newPerson->exchangeArray($data);
+                $this->manager->edit($newPerson);
+            }
+            return $this->redirect()->toRoute('personnel');
+        }
+        $view = new ViewModel([
+                'form' => $form
+            ]);
+        $view->setTemplate('application/personnel/add_edit');
+        return $view;
+    }
+
+    
     public function addAction() {
         $form = new PersonForm($this->manager->getGrades());
+        $form->get('submit')->setAttribute('value', 'Ajouter');
+        $form->setAttribute('method', 'post');
+        $form->setAttribute('action', 'add');
+        
         if($this->getRequest()->isPost()) 
         {
             $data = $this->params()->fromPost();            
@@ -34,9 +69,11 @@ class PersonnelController extends AbstractActionController
                 $this->manager->addNew($newPerson);
                 return $this->redirect()->toRoute('personnel');
             }            
-        } 
-        return new ViewModel([
+        }
+        $view = new ViewModel([
                 'form' => $form
-           ]);
+            ]);
+        $view->setTemplate('application/personnel/add_edit');
+        return $view;
     }
 }
