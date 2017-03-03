@@ -19,7 +19,8 @@
         <tbody>
         <?php
             foreach ($this->persons as $person) {
-              echo $this->partial('application/personnel/indexTableRow', ['person'=>$person]);
+              echo $this->partial('application/personnel/indexTableRow', ['person'=>$person,
+                                                                          'grades' => $this->grades]);
             }    
         ?>
         </tbody>

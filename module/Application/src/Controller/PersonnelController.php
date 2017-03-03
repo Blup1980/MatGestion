@@ -17,7 +17,9 @@ class PersonnelController extends AbstractActionController
     
     public function indexAction() {
         $personnels = $this->manager->getAll();
-        return new ViewModel(['persons' => $personnels]);
+        $grades = $this->manager->getGrades();
+        return new ViewModel(['persons' => $personnels,
+                              'grades' => $grades ]);
     }
     
     public function editAction() {
@@ -39,8 +41,8 @@ class PersonnelController extends AbstractActionController
             if($form->isValid()) {
                 $newPerson = $form->getData();
                 $this->manager->edit($newPerson);
-            }
-            return $this->redirect()->toRoute('personnel');
+                return $this->redirect()->toRoute('personnel');
+            }           
         }
         $view = new ViewModel([
                 'form' => $form

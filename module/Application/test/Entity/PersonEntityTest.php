@@ -25,10 +25,10 @@ class PersonEntityTest extends TestCase
     public function testArrayInjection() {
         $person = new PersonEntity();
         $testData = [
-            'id' => '1234',
+            'id' => 1234,
             'firstname' => 'firstnameStr',
             'lastname' => 'lastnameStr',
-            'grade_id' => 'gradeStr',
+            'grade_id' => 666,
             'active' => 1,
             'driver' => 1,
             'CIPA' => 1,
@@ -53,7 +53,7 @@ class PersonEntityTest extends TestCase
     
     public function testGetSetID(){
         $person = new PersonEntity();
-        $testData = 'idStr';
+        $testData = 314;
         $person->setId($testData);
         $this->assertEquals($testData, $person->getId());
     }
@@ -74,7 +74,7 @@ class PersonEntityTest extends TestCase
     
     public function testGetSetGrade_id(){
         $person = new PersonEntity();
-        $testData = 'gradeStr';
+        $testData = 666;
         $person->setGrade_id($testData);
         $this->assertEquals($testData, $person->getGrade_id());
     }

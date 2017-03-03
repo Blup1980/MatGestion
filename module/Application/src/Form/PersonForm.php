@@ -56,12 +56,12 @@ class PersonForm extends Form {
 
         $this->add([
                 'type'  => 'Zend\Form\Element\Select',
-                'name' => 'grade',
+                'name' => 'grade_id',
                 'attributes' => [
-                    'id' => 'grade'  
+                    'id' => 'grade_id'  
                 ],
                 'options' => [
-                    'label' => 'Grade?',
+                    'label' => 'Grade',
                      'empty_option' => 'Choisir le grade',
                      'value_options' => $this->grades
                 ],
@@ -188,7 +188,7 @@ class PersonForm extends Form {
         );
 
         $inputFilter->add([
-            'name'     => 'grade',
+            'name'     => 'grade_id',
             'required' => true,
             'filters'  => [
                 ['name' => 'StringTrim'],

@@ -38,15 +38,16 @@ class PersonnelManager{
                 $person->getAPR(),
                 $person->getPrepose()
             ] );
-
         $statement->execute();
     }
     
     public function edit(PersonEntity $person) {
-        $resultSet = $this->db->query('SELECT * FROM `personnel` WHERE `id` = ?', [$person->getId()]);
-        $rowData = $resultSet->current()->getArrayCopy();
+        $statement = $this->db->createStatement('SELECT * FROM `personnel` WHERE `id` = ?', [$person->getId()]);
+        $resultSet = $statement->execute();
+        $resultSet->buffer();
+        $result = $resultSet->current();
         $rowGateway = new RowGateway('id', 'personnel', $this->db);
-        $rowGateway->populate($rowData, true);
+        $rowGateway->populate($result, true);
         $rowGateway->firstname = $person->getFirstname();
         $rowGateway->lastname = $person->getLastname();
         $rowGateway->grade_id = $person->getGrade_id();
@@ -63,7 +64,6 @@ class PersonnelManager{
         $rowGateway = new RowGateway('id', 'personnel', $this->db);
         $rowGateway->populate($person->getArrayCopy(), true);
         $rowGateway->delete();
-        
     }
     
     public function getAll() {
@@ -74,14 +74,13 @@ class PersonnelManager{
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
             $resultSet = new HydratingResultSet(new ArraySerializableHydrator, new PersonEntity);
             $resultSet->initialize($result);
-
             foreach ($resultSet as $person) {
                 $personnels[] = $person;
             }
         }
         return $personnels;
     }
-    
+
     public function getPerson($id) {
         $statement = $this->db->createStatement('SELECT * FROM `personnel` WHERE `id` = ?', [$id]);
         $statement->prepare();
@@ -95,7 +94,7 @@ class PersonnelManager{
         }    
         throw new RuntimeException('the person id is not found in the database');
     }
-    
+
     public function getGrades() {
         $grades = [];
         $statement = $this->db->createStatement('SELECT * FROM grades');
@@ -104,7 +103,6 @@ class PersonnelManager{
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
             $resultSet = new ResultSet;
             $resultSet->initialize($result);
-
             foreach ($resultSet as $row) {
                 $grades[] = $row['name'];
             }

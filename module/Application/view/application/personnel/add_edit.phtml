@@ -9,7 +9,7 @@ $form->get('lastname')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>''
     ]);
-$form->get('grade')->setAttributes([
+$form->get('grade_id')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>''
     ]);
@@ -56,9 +56,9 @@ $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
             <?= $this->formElementErrors($form->get('lastname')); ?>
         </div>
         <div class="form-group">
-            <?= $this->formLabel($form->get('grade')); ?>
-            <?= $this->formElement($form->get('grade')); ?>
-            <?= $this->formElementErrors($form->get('grade')); ?>
+            <?= $this->formLabel($form->get('grade_id')); ?>
+            <?= $this->formElement($form->get('grade_id')); ?>
+            <?= $this->formElementErrors($form->get('grade_id')); ?>
         </div>
     </div>
 </div>
