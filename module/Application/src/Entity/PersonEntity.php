@@ -7,13 +7,14 @@
  */
 
 namespace Application\Entity;
+use Zend\Stdlib;
 
-class PersonEntity
+class PersonEntity implements Stdlib\ArraySerializableInterface
 {
     private $id;
     private $lastname;
     private $firstname;
-    private $grade;
+    private $grade_id;
     private $active;
     private $driver;
     private $CIPA;
@@ -21,18 +22,11 @@ class PersonEntity
     private $APR;
     private $prepose;
     
-    public function populate( $id, $firstName, $lastname, $grade) {
-        $this->id       = !empty($id) ? $id : NULL;
-        $this->lastname = !empty($lastname) ? $lastname : NULL;
-        $this->firstname= !empty($firstName) ? $firstName : NULL;
-        $this->grade    = !empty($grade) ? $grade : NULL;
-    }
-    
     public function exchangeArray(array $data){
         $this->id       = !empty($data['id']) ? $data['id'] : NULL;
         $this->lastname = !empty($data['lastname']) ? $data['lastname'] : NULL;
         $this->firstname= !empty($data['firstname']) ? $data['firstname'] : NULL;
-        $this->grade    = !empty($data['grade']) ? $data['grade'] : 0;
+        $this->grade_id = !empty($data['grade_id']) ? $data['grade_id'] : 0;
         $this->active   = !empty($data['active']) ? $data['active'] : 0;
         $this->driver   = !empty($data['driver']) ? $data['driver'] : 0;
         $this->CIPA     = !empty($data['CIPA']) ? $data['CIPA'] : 0;
@@ -41,12 +35,28 @@ class PersonEntity
         $this->prepose  = !empty($data['prepose']) ? $data['prepose'] : 0;
     }
     
+    public function getArrayCopy() {
+        return [
+            'id' => (int)$this->id,
+            'lastname' => $this->lastname,
+            'firstname' => $this->firstname,
+            'grade_id' => (int)$this->grade_id,
+            'active' => (int)$this->active,
+            'driver'=> (int)$this->driver,
+            'CIPA' => (int)$this->CIPA,
+            'CISDIS' => (int)$this->CISDIS,
+            'APR' => (int)$this->APR,
+            'prepose' => (int)$this->prepose
+        ];
+    }
+
+
     public function getId(){
-        return $this->id;
+        return (int)$this->id;
     }
     
     public function setId($id){
-        $this->id = $id;
+        $this->id = (int)$id;
     }
     
     public function getLastname(){
@@ -65,59 +75,59 @@ class PersonEntity
         $this->firstname = $firstname;
     }
     
-    public function getGrade(){
-        return $this->grade;
+    public function getGrade_id(){
+        return (int)$this->grade_id;
     }
     
-    public function setGrade($grade) {
-        $this->grade = $grade;
+    public function setGrade_id($grade) {
+        $this->grade_id = (int)$grade;
     }
     
     public function getActive(){
-        return $this->active;
+        return (int)$this->active;
     }
     
     public function setActive($active) {
-        $this->active = $active;
+        $this->active = (int)$active;
     }
     
     public function getDriver(){
-        return $this->driver;
+        return (int)$this->driver;
     }
     
     public function setDriver($driver) {
-        $this->driver = $driver;
+        $this->driver = (int)$driver;
     }
     
     public function getCIPA(){
-        return $this->CIPA;
+        return (int)$this->CIPA;
     }
     
     public function setCIPA($CIPA) {
-        $this->CIPA = $CIPA;
+        $this->CIPA = (int)$CIPA;
     }
     
     public function getCISDIS(){
-        return $this->CISDIS;
+        return (int)$this->CISDIS;
     }
     
     public function setCISDIS($CISDIS) {
-        $this->CISDIS = $CISDIS;
+        $this->CISDIS = (int)$CISDIS;
     }
     
     public function getAPR(){
-        return $this->APR;
+        return (int)$this->APR;
     }
     
     public function setAPR($APR) {
-        $this->APR = $APR;
+        $this->APR = (int)$APR;
     }
     
     public function getPrepose(){
-        return $this->prepose;
+        return (int)$this->prepose;
     }
     
     public function setPrepose($prepose) {
-        $this->prepose = $prepose;
+        $this->prepose = (int)$prepose;
     }
 }

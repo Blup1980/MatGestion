@@ -29,7 +29,7 @@ class PersonnelControllerTest extends AbstractHttpControllerTestCase
         $this->dispatch('/personnel', 'GET');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
-        $this->assertControllerName(PersonnelController::class); // as specified in router's controller name alias
+        $this->assertControllerName(PersonnelController::class);
         $this->assertControllerClass('PersonnelController');
         $this->assertMatchedRouteName('personnel');
     }
@@ -39,9 +39,30 @@ class PersonnelControllerTest extends AbstractHttpControllerTestCase
         $this->dispatch('/personnel/add', 'GET');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('application');
+        $this->assertControllerName(PersonnelController::class);
+        $this->assertControllerClass('PersonnelController');
+        $this->assertMatchedRouteName('personnel');
+        $this->assertActionName('add');
+    }
+    
+    public function testEditActionCanBeAccessed()
+    {
+        $this->dispatch('/personnel/edit/1');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('application');
+        $this->assertControllerName(PersonnelController::class);
+        $this->assertControllerClass('PersonnelController');
+        $this->assertActionName('edit');
+    }
+    
+    public function testEditWithInvalidId()
+    {
+        $this->dispatch('/personnel/edit/-1');
+        $this->assertRedirect();
+        $this->assertModuleName('application');
         $this->assertControllerName(PersonnelController::class); // as specified in router's controller name alias
         $this->assertControllerClass('PersonnelController');
-        $this->assertMatchedRouteName('add');
-    } 
+        $this->assertActionName('edit');
+    }
 
 }

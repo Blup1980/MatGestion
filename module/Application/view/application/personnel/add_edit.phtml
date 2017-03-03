@@ -110,6 +110,7 @@ $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
 </div>  
 <div class="row">
     <div class="col-md-6">
+        <?= $this->formElement($form->get('id')); ?>
         <?= $this->formElement($form->get('submit')); ?>
         <?= $this->form()->closeTag(); ?>
     </div>

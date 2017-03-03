@@ -31,15 +31,13 @@ class PersonnelController extends AbstractActionController
         $form->bind($person);
         $form->get('submit')->setAttribute('value', 'Ok');
         $form->setAttribute('method', 'post');
-        $form->setAttribute('action', 'edit');
+        $form->setAttribute('action', '/personnel/edit/'. $id);
         if($this->getRequest()->isPost()) 
         {
             $data = $this->params()->fromPost();            
             $form->setData($data);
             if($form->isValid()) {
-                $data = $form->getData();
-                $newPerson = new PersonEntity();
-                $newPerson->exchangeArray($data);
+                $newPerson = $form->getData();
                 $this->manager->edit($newPerson);
             }
             return $this->redirect()->toRoute('personnel');
@@ -51,6 +49,16 @@ class PersonnelController extends AbstractActionController
         return $view;
     }
 
+    public function deleteAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        try {
+            $person = $this->manager->getPerson($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('personnel', ['action' => 'index']);
+        }
+        $this->manager->delete($person);
+        return $this->redirect()->toRoute('personnel', ['action' => 'index']);
+    }
     
     public function addAction() {
         $form = new PersonForm($this->manager->getGrades());

@@ -8,6 +8,7 @@ use Application\Entity\PersonEntity;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Hydrator\ArraySerializable as ArraySerializableHydrator;
 use Zend\Db\RowGateway\RowGateway;
+use RuntimeException;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -48,7 +49,7 @@ class PersonnelManager{
         $rowGateway->populate($rowData, true);
         $rowGateway->firstname = $person->getFirstname();
         $rowGateway->lastname = $person->getLastname();
-        $rowGateway->grade = $person->getGrade();
+        $rowGateway->grade_id = $person->getGrade_id();
         $rowGateway->active = $person->getActive();
         $rowGateway->driver = $person->getDriver();
         $rowGateway->CIPA = $person->getCIPA();
@@ -59,11 +60,10 @@ class PersonnelManager{
     }
     
     public function delete(PersonEntity $person) {
-        $resultSet = $this->db->query('SELECT * FROM `personnel` WHERE `id` = ?', [$person->getId()]);
-        $rowData = $resultSet->current()->getArrayCopy();
         $rowGateway = new RowGateway('id', 'personnel', $this->db);
-        $rowGateway->populate($rowData, true);
+        $rowGateway->populate($person->getArrayCopy(), true);
         $rowGateway->delete();
+        
     }
     
     public function getAll() {
@@ -89,9 +89,11 @@ class PersonnelManager{
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
             $resultSet = new HydratingResultSet(new ArraySerializableHydrator, new PersonEntity);
             $resultSet->initialize($result);
-            return $resultSet->current();
+            if ($resultSet->valid()) {
+                return $resultSet->current();
+            }
         }    
-        throw new Exception('the person id is not found in the database');
+        throw new RuntimeException('the person id is not found in the database');
     }
     
     public function getGrades() {
@@ -104,7 +106,7 @@ class PersonnelManager{
             $resultSet->initialize($result);
 
             foreach ($resultSet as $row) {
-                $grades[] = $row['Name'];
+                $grades[] = $row['name'];
             }
         }
         return $grades;

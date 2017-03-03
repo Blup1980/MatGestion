@@ -44,7 +44,7 @@ class PersonnelManagerTest extends AbstractHttpControllerTestCase
         $mockedStatement = $this->prophesize(Adapter\Driver\Mysqli\Statement::class);
         $mockedStatement->prepare()->shouldBeCalled();
         
-        $gradeList = [ ['Name' => 'first'], ['Name' => 'Second' ] ];
+        $gradeList = [ ['name' => 'first'], ['name' => 'Second' ] ];
 
         $mockedResult = new MockedDbResult($gradeList);
         
@@ -56,6 +56,10 @@ class PersonnelManagerTest extends AbstractHttpControllerTestCase
         $this->assertInstanceOf(PersonnelManager::class, $dutPersonnelManager);
         $dutGrades = $dutPersonnelManager->getGrades();
         $this->assertCount(count($gradeList), $dutGrades);
+        for ($i = 0; $i<count($gradeList);$i++) {
+            $gradeIn = $gradeList[$i];
+            $this->assertEquals($dutGrades[$i], $gradeIn['name']);
+        }
     }
 
 }
@@ -81,9 +85,7 @@ class MockedDbResult implements \Zend\Db\Adapter\Driver\ResultInterface {
     }
 
     public function next() {
-        if ($this->index < count($this->mockedResult) - 1) {
-            $this->index++;
-        }
+        $this->index++;
     }
 
     public function rewind() {
@@ -91,7 +93,7 @@ class MockedDbResult implements \Zend\Db\Adapter\Driver\ResultInterface {
     }
 
     public function valid(): bool {
-        if ($this->index < count($this->mockedResult) - 1) {
+        if ($this->index < count($this->mockedResult) ) {
             return true;
         }  
         else {

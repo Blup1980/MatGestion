@@ -22,6 +22,17 @@ class PersonForm extends Form {
     private function addElements() 
     {
         $this->add([
+                'type'  => 'hidden',
+                'name' => 'id',
+                'attributes' => [                
+                    'id' => 'id'
+                ],
+                'options' => [
+                    'label' => '',
+                ],
+            ]);
+        
+        $this->add([
                 'type'  => 'text',
                 'name' => 'firstname',
                 'attributes' => [                
@@ -50,7 +61,7 @@ class PersonForm extends Form {
                     'id' => 'grade'  
                 ],
                 'options' => [
-                    'label' => 'Which is your mother tongue?',
+                    'label' => 'Grade?',
                      'empty_option' => 'Choisir le grade',
                      'value_options' => $this->grades
                 ],
