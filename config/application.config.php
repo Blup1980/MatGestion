@@ -1,9 +1,19 @@
 <?php
 /**
- * If you need an environment-specific system or application configuration,
- * there is an example in the documentation
- * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-system-configuration
- * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
+ *  MatGestion
+ *  Copyright (C) 2017 Blup1980
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 return [
     // Retrieve list of modules used in this application.
