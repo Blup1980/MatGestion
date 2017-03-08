@@ -8,6 +8,14 @@
   <td> <?php if($this->person->getPrepose()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
   <td> <?php if($this->person->getCIPA()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
   <td> <?php if($this->person->getCISDIS()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <a href=personnel/edit/<?= $this->person->getId() ?> class="btn btn-default btn-xs">Editer</a></td>
-  <td> <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal" data-personnelName="<?= $this->person->getLastname() ?>, <?= $this->person->getFirstName() ?>" data-personnelId="<?= $this->person->getId()?>">Effacer</button></td>
+  <td> 
+    <a href=personnel/edit/<?= $this->person->getId() ?> class="btn btn-default btn-xs">Editer</a>
+    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" 
+            data-target="#confirmDelete" 
+            data-personnelName="<?= $this->person->getLastname() ?>, <?= $this->person->getFirstName() ?>" 
+            data-personnelId=<?= $this->person->getId()?>>
+          <i class="glyphicon glyphicon-trash"></i>
+          Effacer
+    </button>
+  </td>
 </tr>

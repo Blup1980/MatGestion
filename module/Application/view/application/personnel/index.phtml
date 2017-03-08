@@ -28,33 +28,36 @@
     <a href=personnel/add class="btn btn-default">Ajouter</a>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Effacer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Effacer</h4>
       </div>
       <div class="modal-body">
           ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-danger">Effacer</button>
+          <form method="POST" id="deleteForm" accept-charset="UTF-8" style="display:inline">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-danger" id="confirm">Effacer</button>
+          </form>
       </div>
     </div>
   </div>
 </div>
-<script>
-$('#deleteModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget)
-  var personnelName = button.dataset('personnelName')
-  var personnelId = button.dataset('personnelId')
-  
-  var modal = $(this)
-  modal.find('.modal-body').text('Vous allez supprimer : ' + personnelId)
-  //modal.find('.modal-body input').val(recipient)
-})  
+<script type="text/javascript">
+    $('#confirmDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var personnelName = button.attr('data-personnelName')
+        var personnelId = button.attr('data-personnelId')
+
+        var modal = $(this)
+        modal.find('.modal-footer #deleteForm').attr('action','personnel/delete/' + personnelId)
+        modal.find('.modal-body').text('Vous allez supprimer : ' + personnelName)
+    })  
+    $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+        $(this).data('form').submit();
+    });
 </script>
