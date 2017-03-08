@@ -70,6 +70,10 @@ class PersonForm extends Form {
                 ],
             ]);
 
+        
+        foreach ($this->grades as $grade) {
+            $selectValue[$grade->getId()] = $grade->getName();
+        }
         $this->add([
                 'type'  => 'Zend\Form\Element\Select',
                 'name' => 'grade_id',
@@ -79,7 +83,7 @@ class PersonForm extends Form {
                 'options' => [
                     'label' => 'Grade',
                      'empty_option' => 'Choisir le grade',
-                     'value_options' => $this->grades
+                     'value_options' => $selectValue
                 ],
             ]);
         

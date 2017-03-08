@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Liste du personnel</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Matériel</th>
+                <?php
+                foreach ($this->personnalManager->getGrades() as $grade) {
+                    echo '<th>' . $grade->getName() . '</th>';
+                }    
+                ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            foreach ($this->materialForGrades as $material) {
+              echo $this->partial('application/material-for-grade/indexTableRow', ['materialName'=>$material->getName(),
+                                                                          'grades' => $this->grades]);
+            }
+        ?>
+        </tbody>
+    </table>
+    <a href=personnel/add class="btn btn-default">Ajouter</a>
+</div>

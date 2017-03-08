@@ -46,6 +46,16 @@ return [
                     ],
                 ],
             ],
+            'materialForGrade' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/materialforgrade[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\MaterialForGradeController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

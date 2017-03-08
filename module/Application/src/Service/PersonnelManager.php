@@ -18,8 +18,8 @@
 Namespace Application\Service;
 
 use Zend\Db\Adapter\Driver\ResultInterface;
-use Zend\Db\ResultSet\ResultSet;
 use Application\Entity\PersonEntity;
+use Application\Entity\GradeEntity;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Hydrator\ArraySerializable as ArraySerializableHydrator;
 use Zend\Db\RowGateway\RowGateway;
@@ -112,14 +112,14 @@ class PersonnelManager{
 
     public function getGrades() {
         $grades = [];
-        $statement = $this->db->createStatement('SELECT * FROM grades');
+        $statement = $this->db->createStatement('SELECT name, id FROM grades ORDER BY `rank`');
         $statement->prepare();
         $result = $statement->execute(NULL);
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
-            $resultSet = new ResultSet;
+            $resultSet = new HydratingResultSet(new ArraySerializableHydrator, new GradeEntity);
             $resultSet->initialize($result);
-            foreach ($resultSet as $row) {
-                $grades[] = $row['name'];
+            foreach ($resultSet as $grade) {
+                $grades[] = $grade;
             }
         }
         return $grades;

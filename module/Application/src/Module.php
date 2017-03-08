@@ -41,6 +41,10 @@ class Module implements ConfigProviderInterface
                     $db = $container->get('db');
                     return new Service\PersonnelManager($db);
                 },
+                Service\MaterialManager::class => function($container) {
+                    $db = $container->get('db');
+                    return new Service\MaterialManager($db);
+                }
             ],
         ];
     }
@@ -50,9 +54,15 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Controller\PersonnelController::class => function($container) {
-                    $PersonnelManager = $container->get(Service\PersonnelManager::class);
-                    return new Controller\PersonnelController($PersonnelManager);   
+                    $personnelManager = $container->get(Service\PersonnelManager::class);
+                    return new Controller\PersonnelController($personnelManager);   
                 },
+                        
+                Controller\MaterialForGradeController::class => function($container) {
+                    $materialManager = $container->get(Service\MaterialManager::class);
+                    $personnelManager = $container->get(Service\PersonnelManager::class); 
+                    return new Controller\MaterialForGradeController($materialManager,$personnelManager);
+                }
             ],
         ];
     }

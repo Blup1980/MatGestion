@@ -34,8 +34,13 @@ class PersonnelController extends AbstractActionController
     public function indexAction() {
         $personnels = $this->manager->getAll();
         $grades = $this->manager->getGrades();
+        
+        foreach ($grades as $grade) {
+            $gradeList[$grade->getId()] = $grade->getName();
+        }
+        
         return new ViewModel(['persons' => $personnels,
-                              'grades' => $grades ]);
+                              'gradesVsId' => $gradeList ]);
     }
     
     public function editAction() {
