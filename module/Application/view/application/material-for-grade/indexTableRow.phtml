@@ -4,7 +4,7 @@
         foreach ($grades as $grade) {
             echo '<td>';
             if ($this->materialRow->getGrades()[$grade->getId()]) {
-                echo '<span class="glyphicon glyphicon-ok"></span>';
+                echo $this->materialRow->getGrades()[$grade->getId()];
             }  
             echo '</td>';
         }

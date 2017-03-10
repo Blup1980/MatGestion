@@ -29,6 +29,25 @@ class MaterialPerGradeRow {
     private $materialName;
     private $grades;
     
+    public function populateFromForm($array) {
+        $this->materialId = !empty($array['material_id']) ? $array['material_id'] : NULL;
+        for ($i=0; $i< count($array);$i++) {
+            if (array_key_exists('grade_'.$i,$array)) {
+                $this->grades[$i] = $array['grade_'.$i];
+                }
+        }
+    }
+    
+    public function getFormArray() {
+        $returnedArray = [];
+        foreach ($this->grades as $gradeId => $value) {
+            $returnedArray['grade_'.$gradeId] = 1;
+        }
+        $returnedArray['material_id'] = $this->materialId;
+        $returnedArray['material_name'] = $this->materialName;
+        return $returnedArray;
+    }
+    
     public function getMaterialId() {
         return $this->materialId;
     }

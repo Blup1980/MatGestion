@@ -19,50 +19,51 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Form\MaterialForGradeForm;
+use Application\ValueObject\MaterialPerGradeRow;
 
 class MaterialForGradeController extends AbstractActionController
 {
     private $materialManager;
-    private $personnalManager;
+    private $personnelManager;
     
     public function __construct(\Application\Service\MaterialManager $materialManager,
-    \Application\Service\PersonnelManager $personnalManager) {
+    \Application\Service\PersonnelManager $personnelManager) {
         $this->materialManager = $materialManager;
-        $this->personnalManager = $personnalManager;
+        $this->personnelManager = $personnelManager;
     }
     
     public function indexAction() {
-        $materialForGrades = $this->materialManager->getAllForGrade();
+        $materialForGrades = $this->materialManager->getGradeForSpecificMaterial();
         return new ViewModel(['materialForGrades' => $materialForGrades,
-                              'personnalManager' => $this->personnalManager ]);
+                              'personnelManager' => $this->personnelManager ]);
     }
     
     public function editAction() {
-//        $id = (int) $this->params()->fromRoute('id', 0);
-//        try {
-//            $person = $this->personnelManager->getPerson($id);
-//        } catch (\Exception $e) {
-//            return $this->redirect()->toRoute('personnel', ['action' => 'index']);
-//        }
-//        $form = new PersonForm($this->personnelManager->getGrades());
-//        $form->bind($person);
-//        $form->get('submit')->setAttribute('value', 'Ok');
-//        $form->setAttribute('method', 'post');
-//        $form->setAttribute('action', '/personnel/edit/'. $id);
-//        if($this->getRequest()->isPost()) 
-//        {
-//            $data = $this->params()->fromPost();            
-//            $form->setData($data);
-//            if($form->isValid()) {
-//                $newPerson = $form->getData();
-//                $this->personnelManager->edit($newPerson);
-//                return $this->redirect()->toRoute('personnel');
-//            }           
-//        }
-//        $view = new ViewModel([
-//                'form' => $form
-//            ]);
-//        $view->setTemplate('application/personnel/add_edit');
-//        return $view;
+        $id = (int) $this->params()->fromRoute('id', 0);
+        try {
+            $material = $this->materialManager->getGradeForSpecificMaterial($id)[0];
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('materialForGrade', ['action' => 'index']);
+        }
+        $form = new MaterialForGradeForm($this->personnelManager->getGrades(), $material);
+        $formData = $material->getFormArray();
+        $form->setData($formData);
+        $form->setAttribute('action', '/materialforgrade/edit/'. $material->getMaterialId());
+        if($this->getRequest()->isPost()) 
+        {
+            $data = $this->params()->fromPost();            
+            $form->setData($data);
+            if($form->isValid()) {
+                $editedAssignement = new MaterialPerGradeRow;
+                $editedAssignement->populateFromForm($form->getData());
+                $this->materialManager->setGradeForSpecificMaterial($editedAssignement);
+                return $this->redirect()->toRoute('materialForGrade', ['action' => 'index']);
+            }
+        }
+        $view = new ViewModel([
+                'form' => $form
+            ]);
+        return $view;
     }
 }

@@ -206,6 +206,11 @@ class PersonForm extends Form {
             ],
         ]  
         );
+        
+        $allowedGradeId = [];
+        foreach ($this->grades as $grade) {
+            $allowedGradeId[] = $grade->getId();
+        }
 
         $inputFilter->add([
             'name'     => 'grade_id',
@@ -217,17 +222,11 @@ class PersonForm extends Form {
             ],                
             'validators' => [
                 [
-                'name' => 'GreaterThan',
+                'name' => 'InArray',
                    'options' => [
-                       'min' => 0,
+                       'haystack' => $allowedGradeId,
                        'inclusive' => true
-                   ],
-                'name' => 'LessThan',
-                   'options' => [
-                       'max' => count($this->grades),
-                       'inclusive' => false
                    ]
-               
                 ]
             ]
         ]     

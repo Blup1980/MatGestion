@@ -1,0 +1,40 @@
+<?php
+$form = $this->form;
+$form->prepare();
+
+$elements = $form->getElements();
+foreach ($elements as $key => $element ){
+    if (strpos($key, 'grade_') !== false) {
+        $form->get($key)->setAttributes([
+            'class'=>'form-control', 
+            'placeholder'=>''
+            ]);
+    }
+}
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+?>
+
+<h1><?= $form->getMaterial()->getMaterialName(); ?></h1>
+<?= $this->form()->openTag($form); ?>
+<div class="row">
+    <?php
+        foreach ($elements as $key => $element ){
+        if (strpos($key, 'grade_') !== false) {
+            echo '<div class="col-md-1">';
+            echo '<div class="form-group">';
+            echo $this->formLabel($form->get($key));
+            echo $this->formElement($form->get($key)); 
+            echo $this->formElementErrors($form->get($key));
+            echo '</div></div>';
+        }
+    }?>
+</div>  
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->formElement($form->get('material_id')); ?>
+        <?= $this->formElement($form->get('submit')); ?>
+        
+    </div>
+</div>
+<?= $this->form()->closeTag(); ?>

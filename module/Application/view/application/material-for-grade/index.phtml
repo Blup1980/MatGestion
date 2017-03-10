@@ -6,9 +6,9 @@
             <tr>
                 <th>Matériel</th>
                 <?php
-                $grades = $this->personnalManager->getGrades();
+                $grades = $this->personnelManager->getGrades();
                 foreach ($grades as $grade) {
-                    echo '<th>' . $grade->getName() . '</th>';
+                    echo '<th>&nbsp;</th>';
                 }    
                 ?>
                 <th>Action</th>
