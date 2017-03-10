@@ -19,8 +19,9 @@
         <tbody>
         <?php
             foreach ($this->persons as $person) {
-              echo $this->partial('application/personnel/indexTableRow', ['person'=>$person,
-                                                                          'gradesVsId' => $this->gradesVsId]);
+              echo $this->partial('application/personnel/indexTableRow', 
+                                    ['person'=>$person,
+                                     'gradesVsId' => $this->gradesVsId]);
             }    
         ?>
         </tbody>
@@ -57,7 +58,7 @@
         modal.find('.modal-footer #deleteForm').attr('action','personnel/delete/' + personnelId)
         modal.find('.modal-body').text('Vous allez supprimer : ' + personnelName)
     })  
-    $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+    $('#confirm').on('click', function(){
         $(this).data('form').submit();
     });
 </script>

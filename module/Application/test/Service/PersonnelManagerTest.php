@@ -23,7 +23,7 @@ use Zend\Db\Adapter;
 use Application\Service\PersonnelManager;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use Prophecy\Argument;
+use Application\Entity\GradeEntity;
 
 class PersonnelManagerTest extends AbstractHttpControllerTestCase
 {
@@ -54,14 +54,19 @@ class PersonnelManagerTest extends AbstractHttpControllerTestCase
         $mockedDb = $this->mockDbAdapter();
         $mockedStatement = $this->prophesize(Adapter\Driver\Mysqli\Statement::class);
         $mockedStatement->prepare()->shouldBeCalled();
+        $testGrade1 = new GradeEntity();
+        $testGrade2 = new GradeEntity();
         
-        $gradeList = [ ['name' => 'first'], ['name' => 'Second' ] ];
+        $testGrade1->setId(2);
+        $testGrade2->setId(1);  
+        
+        $gradeList = [ $testGrade1->getArrayCopy(), $testGrade2->getArrayCopy() ];
 
         $mockedResult = new MockedDbResult($gradeList);
         
         $mockedStatement->prepare()->shouldBeCalled();
         $mockedStatement->execute(NULL)->willReturn($mockedResult);
-        $mockedDb->createStatement("SELECT * FROM grades")->willReturn($mockedStatement);
+        $mockedDb->createStatement("SELECT name, id FROM grades ORDER BY `rank`")->willReturn($mockedStatement);
         
         $dutPersonnelManager = new PersonnelManager($mockedDb->reveal());
         $this->assertInstanceOf(PersonnelManager::class, $dutPersonnelManager);
@@ -69,10 +74,9 @@ class PersonnelManagerTest extends AbstractHttpControllerTestCase
         $this->assertCount(count($gradeList), $dutGrades);
         for ($i = 0; $i<count($gradeList);$i++) {
             $gradeIn = $gradeList[$i];
-            $this->assertEquals($dutGrades[$i], $gradeIn['name']);
+            $this->assertEquals($dutGrades[$i]->getId(), $gradeIn['id']);
         }
     }
-
 }
 
 class MockedDbResult implements \Zend\Db\Adapter\Driver\ResultInterface {

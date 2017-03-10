@@ -45,7 +45,7 @@ class PersonnelManager{
             [
                 $person->getLastname(),
                 $person->getFirstname(),
-                $person->getGrade(),
+                $person->getGrade_id(),
                 $person->getActive(),
                 $person->getDriver(),
                 $person->getCIPA(),
