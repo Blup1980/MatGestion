@@ -1,13 +1,15 @@
 <tr>
-  <td> <?= $this->person->getLastname() ?> </td>
-  <td> <?= $this->person->getFirstName() ?> </td>
-  <td> <?= $this->grades[$this->person->getGrade_id()] ?> </td>
-  <td> <?php if($this->person->getActive()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <?php if($this->person->getDriver()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <?php if($this->person->getAPR()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <?php if($this->person->getPrepose()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <?php if($this->person->getCIPA()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <?php if($this->person->getCISDIS()) { ?><span class="glyphicon glyphicon-ok"></span> <?php }; ?></td>
-  <td> <a href=personnel/edit/<?= $this->person->getId() ?> class="btn btn-default btn-xs">Editer</a></td>
-  <td> <a href=personnel/delete/<?= $this->person->getId() ?> class="btn btn-default btn-xs">Effacer</a></td>
+  <td> <?= $this->materialRow->getMaterialName() ?> </td>
+  <?php 
+        foreach ($grades as $grade) {
+            echo '<td>';
+            if ($this->materialRow->getGrades()[$grade->getId()]) {
+                echo '<span class="glyphicon glyphicon-ok"></span>';
+            }  
+            echo '</td>';
+        }
+        ?>
+  <td>
+    <a href=materialforgrade/edit/<?= $this->materialRow->getMaterialId() ?> class="btn btn-default btn-xs">Editer</a>
+  </td>
 </tr>

@@ -6,20 +6,22 @@
             <tr>
                 <th>Matériel</th>
                 <?php
-                foreach ($this->personnalManager->getGrades() as $grade) {
+                $grades = $this->personnalManager->getGrades();
+                foreach ($grades as $grade) {
                     echo '<th>' . $grade->getName() . '</th>';
                 }    
                 ?>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
         <?php
-            foreach ($this->materialForGrades as $material) {
-              echo $this->partial('application/material-for-grade/indexTableRow', ['materialName'=>$material->getName(),
-                                                                          'grades' => $this->grades]);
+            foreach ($this->materialForGrades as $materialRow) {
+              echo $this->partial('application/material-for-grade/indexTableRow',
+                                    ['materialRow'=>$materialRow,
+                                     'grades' => $grades ]);
             }
         ?>
         </tbody>
     </table>
-    <a href=personnel/add class="btn btn-default">Ajouter</a>
 </div>

@@ -23,6 +23,7 @@ use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Hydrator\ArraySerializable as ArraySerializableHydrator;
 use Zend\Db\RowGateway\RowGateway;
 use RuntimeException;
+use Application\ValueObject\MaterialPerGradeRow;
 
 
 class MaterialManager{
@@ -33,7 +34,38 @@ class MaterialManager{
     }
     
     public function getAllForGrade() {
-        
+        $materielPerGradeRows = [];
+        $statement = $this->db->createStatement('
+            SELECT mg.id, mg.material_id, m.name as material_name, 
+                   mg.grade_id, g.name as grade_name 
+            FROM `materialPerGrade` AS mg 
+            LEFT JOIN `material` as m ON m.id = mg.material_id 
+            LEFT JOIN grades as g ON g.id = mg.grade_id 
+            ORDER BY material_id,grade_id;');
+        $statement->prepare();
+        $resultSet = $statement->execute(NULL);
+        if ($resultSet instanceof ResultInterface && $resultSet->isQueryResult()) {
+            $currentMaterialId = NULL;
+            $currentRow = NULL;
+            $currentGrades = [];
+            foreach ($resultSet as $materialRow) {
+                if ($materialRow['material_id'] != $currentMaterialId) {
+                    if ($currentRow) {
+                        $currentRow->setGrades($currentGrades);
+                        $materielPerGradeRows[] = $currentRow;
+                        $currentGrades = [];
+                    }
+                    $currentMaterialId = $materialRow['material_id'];
+                    $currentRow = new MaterialPerGradeRow();
+                    $currentRow->setMaterialId($materialRow['material_id']);
+                    $currentRow->setMaterialName($materialRow['material_name']);
+                }
+                $currentGrades[ $materialRow['grade_id'] ] = $materialRow['grade_name'];
+           }
+           $currentRow->setGrades($currentGrades);
+           $materielPerGradeRows[] = $currentRow;
+        }
+        return $materielPerGradeRows;
     }
     
 //    public function addNew(PersonEntity $person) {
