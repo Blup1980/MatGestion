@@ -49,7 +49,7 @@ class MaterialForGradeController extends AbstractActionController
         $form = new MaterialForGradeForm($this->personnelManager->getGrades(), $material);
         $formData = $material->getFormArray();
         $form->setData($formData);
-        $form->setAttribute('action', '/materialforgrade/edit/'. $material->getMaterialId());
+        $form->setAttribute('action', $material->getMaterialId());
         if($this->getRequest()->isPost()) 
         {
             $data = $this->params()->fromPost();            

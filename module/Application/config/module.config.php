@@ -46,12 +46,33 @@ return [
                     ],
                 ],
             ],
+            'material' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/material',
+                    'defaults' => [
+                        'controller' => Controller\MaterialController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            
             'materialForGrade' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/materialforgrade[/:action[/:id]]',
+                    'route'    => '/material/materialforgrade[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\MaterialForGradeController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'materialForIncorp' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/material/materialforincorp[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\MaterialForIncorpController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -61,6 +82,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\MaterialController::class => InvokableFactory::class,
             ],
         ],
     'view_manager' => [
