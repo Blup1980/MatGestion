@@ -56,12 +56,16 @@ class Module implements ConfigProviderInterface
                 Controller\PersonnelController::class => function($container) {
                     $personnelManager = $container->get(Service\PersonnelManager::class);
                     return new Controller\PersonnelController($personnelManager);   
-                },
-                        
+                },      
                 Controller\MaterialForGradeController::class => function($container) {
                     $materialManager = $container->get(Service\MaterialManager::class);
                     $personnelManager = $container->get(Service\PersonnelManager::class); 
                     return new Controller\MaterialForGradeController($materialManager,$personnelManager);
+                },      
+                Controller\MaterialForIncorpController::class => function($container) {
+                    $materialManager = $container->get(Service\MaterialManager::class);
+                    $personnelManager = $container->get(Service\PersonnelManager::class); 
+                    return new Controller\MaterialForIncorpController($materialManager,$personnelManager);
                 }
             ],
         ];
