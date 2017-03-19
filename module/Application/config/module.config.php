@@ -56,7 +56,16 @@ return [
                     ],
                 ],
             ],
-            
+            'materialPersonnel' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/material/materialpersonnel[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\MaterialPersonnelController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'materialForGrade' => [
                 'type'    => Segment::class,
                 'options' => [

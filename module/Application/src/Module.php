@@ -18,9 +18,6 @@
 
 namespace Application;
 
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
 class Module implements ConfigProviderInterface
@@ -56,7 +53,12 @@ class Module implements ConfigProviderInterface
                 Controller\PersonnelController::class => function($container) {
                     $personnelManager = $container->get(Service\PersonnelManager::class);
                     return new Controller\PersonnelController($personnelManager);   
-                },      
+                },            
+                Controller\MaterialPersonnelController::class => function($container) {
+                    $materialManager = $container->get(Service\MaterialManager::class);
+                    $personnelManager = $container->get(Service\PersonnelManager::class); 
+                    return new Controller\MaterialPersonnelController($materialManager,$personnelManager);
+                },
                 Controller\MaterialForGradeController::class => function($container) {
                     $materialManager = $container->get(Service\MaterialManager::class);
                     $personnelManager = $container->get(Service\PersonnelManager::class); 

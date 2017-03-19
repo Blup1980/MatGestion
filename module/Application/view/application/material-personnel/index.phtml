@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Liste du personnel</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            foreach ($this->persons as $person)
+            { ?>
+              <tr>
+                <td> <?= $person->getLastname() ?> </td>
+                <td> <?= $person->getFirstName() ?> </td>
+                <td> <a href="materialpersonnel/list/<?= $person->getId() ?>" class="btn btn-default">Choisir</a> </td>
+              </tr>  
+            <?php } ?>   
+        </tbody>
+    </table>
+    
+</div>

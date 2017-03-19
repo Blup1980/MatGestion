@@ -21,6 +21,7 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 use Application\Entity\PersonEntity;
 use Application\Entity\GradeEntity;
 use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Hydrator\ArraySerializable as ArraySerializableHydrator;
 use Zend\Db\RowGateway\RowGateway;
 use RuntimeException;
@@ -108,6 +109,21 @@ class PersonnelManager{
             }
         }    
         throw new RuntimeException('the person id is not found in the database');
+    }
+    
+    public function checkExist($id) {
+        $statement = $this->db->createStatement('SELECT * FROM `personnel` WHERE `id` = ?', [$id]);
+        $statement->prepare();
+        $result = $statement->execute(NULL);
+        $result = $statement->execute(NULL);
+        if ($result instanceof ResultInterface && $result->isQueryResult()) {
+            $resultSet = new ResultSet;
+            $resultSet->initialize($result);
+            if ($resultSet->count() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getGrades() {
