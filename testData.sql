@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2017 at 06:31 PM
+-- Generation Time: Mar 22, 2017 at 05:14 PM
 -- Server version: 10.0.29-MariaDB-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -109,7 +109,15 @@ INSERT INTO `material` (`id`, `name`, `ECAnum`, `size_id`) VALUES
 (30, 'Anneau cousu + Mousequeton', NULL, NULL),
 (31, 'Clef panneau détéction', NULL, NULL),
 (32, 'Pager & Accessoires', NULL, NULL),
-(33, 'Grade Velcro', NULL, 16);
+(33, 'Grade Velcro', NULL, 16),
+(34, 'Bandes autocollantes casque f1 rouge', NULL, NULL),
+(35, 'Bandes autocollantes casque f1 grise', NULL, NULL),
+(36, 'Bandes autocollantes casque f1 jaune', NULL, NULL),
+(37, 'Tenue de sortie Veste', NULL, NULL),
+(38, 'Tenue de sortie Pantalon', NULL, NULL),
+(39, 'Tenue de sortie Chemise manches longues', NULL, NULL),
+(40, 'Tenue de sortie Chemise manches courtes', NULL, NULL),
+(41, 'Tenue de sortie Cravatte', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,11 +144,11 @@ CREATE TABLE `personnel` (
 
 INSERT INTO `personnel` (`id`, `lastname`, `firstname`, `grade_id`, `active`, `CIPA`, `CISDIS`, `driver`, `APR`, `prepose`) VALUES
 (1, 'Mon Nom', 'Mon prenom', 3, 1, 0, 0, 0, 0, 0),
-(2, 'Raemy', 'Johanne', 8, 1, 0, 0, 1, 1, 1),
-(3, 'Raemy', 'Xavier', 6, 1, 0, 0, 0, 0, 0),
+(2, 'Worth', 'Jonne', 8, 1, 0, 0, 1, 1, 1),
+(3, 'Ra', 'Xav', 6, 1, 0, 0, 0, 0, 0),
 (4, 'Zorg', 'Manimus', 5, 1, 1, 1, 1, 1, 1),
-(5, 'Muller2', 'Jean', 2, 1, 1, 1, 1, 1, 1),
-(6, 'Dujardin', 'Jean', 0, 0, 0, 0, 0, 0, 0);
+(5, 'Muller2', 'Jean', 4, 1, 1, 1, 1, 1, 1),
+(7, 'Moriez', 'Sandra', 9, 1, 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -603,12 +611,12 @@ ALTER TABLE `grades`
 -- AUTO_INCREMENT for table `material`
 --
 ALTER TABLE `material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `personnel`
 --
 ALTER TABLE `personnel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of the personnel', AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of the personnel', AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `size`
 --
