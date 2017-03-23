@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2017 at 05:14 PM
+-- Generation Time: Mar 23, 2017 at 05:10 PM
 -- Server version: 10.0.29-MariaDB-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -122,6 +122,94 @@ INSERT INTO `material` (`id`, `name`, `ECAnum`, `size_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `materialPerGrade`
+--
+
+CREATE TABLE `materialPerGrade` (
+  `id` int(11) NOT NULL,
+  `material_id` int(11) NOT NULL,
+  `grade_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `materialPerGrade`
+--
+
+INSERT INTO `materialPerGrade` (`id`, `material_id`, `grade_id`) VALUES
+(93, 33, 2),
+(94, 33, 3),
+(95, 33, 4),
+(96, 33, 5),
+(97, 33, 6),
+(98, 33, 7),
+(99, 33, 8),
+(100, 33, 9),
+(101, 33, 10),
+(102, 33, 11),
+(103, 33, 12),
+(104, 33, 13),
+(105, 33, 14),
+(106, 33, 15),
+(107, 33, 16),
+(108, 33, 17),
+(109, 33, 18),
+(110, 33, 19),
+(111, 33, 20),
+(112, 33, 21),
+(127, 34, 16),
+(128, 34, 17),
+(129, 34, 18),
+(130, 34, 19),
+(131, 34, 20),
+(132, 34, 21),
+(113, 35, 2),
+(114, 35, 3),
+(115, 35, 4),
+(116, 36, 5),
+(117, 36, 6),
+(118, 36, 7),
+(119, 36, 8),
+(120, 36, 9),
+(121, 36, 10),
+(122, 36, 11),
+(123, 36, 12),
+(124, 36, 13),
+(125, 36, 14),
+(126, 36, 15),
+(133, 37, 16),
+(134, 37, 17),
+(135, 37, 18),
+(136, 37, 19),
+(137, 37, 20),
+(138, 37, 21),
+(139, 38, 16),
+(140, 38, 17),
+(141, 38, 18),
+(142, 38, 19),
+(143, 38, 20),
+(144, 38, 21),
+(145, 39, 16),
+(146, 39, 17),
+(147, 39, 18),
+(148, 39, 19),
+(149, 39, 20),
+(150, 39, 21),
+(151, 40, 16),
+(152, 40, 17),
+(153, 40, 18),
+(154, 40, 19),
+(155, 40, 20),
+(156, 40, 21),
+(157, 41, 16),
+(158, 41, 17),
+(159, 41, 18),
+(160, 41, 19),
+(161, 41, 20),
+(162, 41, 21);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `personnel`
 --
 
@@ -144,11 +232,11 @@ CREATE TABLE `personnel` (
 
 INSERT INTO `personnel` (`id`, `lastname`, `firstname`, `grade_id`, `active`, `CIPA`, `CISDIS`, `driver`, `APR`, `prepose`) VALUES
 (1, 'Mon Nom', 'Mon prenom', 3, 1, 0, 0, 0, 0, 0),
-(2, 'Worth', 'Jonne', 8, 1, 0, 0, 1, 1, 1),
-(3, 'Ra', 'Xav', 6, 1, 0, 0, 0, 0, 0),
+(2, 'Ray', 'Johne', 8, 1, 0, 0, 1, 1, 1),
+(3, 'Rae', 'Xier', 6, 1, 0, 0, 0, 0, 0),
 (4, 'Zorg', 'Manimus', 5, 1, 1, 1, 1, 1, 1),
 (5, 'Muller2', 'Jean', 4, 1, 1, 1, 1, 1, 1),
-(7, 'Moriez', 'Sandra', 9, 1, 0, 0, 1, 1, 0);
+(7, 'Moiez', 'Sand', 9, 1, 0, 0, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -581,6 +669,13 @@ ALTER TABLE `material`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `materialPerGrade`
+--
+ALTER TABLE `materialPerGrade`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_index` (`material_id`,`grade_id`);
+
+--
 -- Indexes for table `personnel`
 --
 ALTER TABLE `personnel`
@@ -612,6 +707,11 @@ ALTER TABLE `grades`
 --
 ALTER TABLE `material`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `materialPerGrade`
+--
+ALTER TABLE `materialPerGrade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 --
 -- AUTO_INCREMENT for table `personnel`
 --

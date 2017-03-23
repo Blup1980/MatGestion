@@ -43,7 +43,7 @@ class MaterialManager{
             }
             
             $statement->prepare();
-            $resultSet = $statement->execute(NULL);
+            $statement->execute(NULL);
         }
     }
     
